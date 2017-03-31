@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ -c "/dev/ttyUSB0" ]; then
+	echo LISTENING TO NANO
+	stty -F /dev/ttyUSB0 cs8 9600 ignbrk -brkint -icrnl -imaxbel -opost -onlcr -isig -icanon -iexten -echo -echoe -echok -echoctl -echoke noflsh -ixon -crtscts
+	cat /dev/ttyUSB0
+elif [ -c "/dev/ttyACM0" ]; then
+	echo LISTENING TO UNO
+	stty -F /dev/ttyACM0 cs8 9600 ignbrk -brkint -icrnl -imaxbel -opost -onlcr -isig -icanon -iexten -echo -echoe -echok -echoctl -echoke noflsh -ixon -crtscts
+	cat /dev/ttyACM0
+else
+	echo NO KNOWN ARDUINO ATTACHED
+fi

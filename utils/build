@@ -1,0 +1,27 @@
+#!/bin/bash
+
+mkdir bin
+
+echo [1/6] COMPILE
+avr-gcc -Os -DF_CPU=16000000UL -mmcu=atmega328p -c -o bin/main.o main.c
+
+echo [2/6] LINK
+avr-gcc -mmcu=atmega328p bin/main.o -o bin/main.obj
+
+echo [3/6] OBJCOPY
+avr-objcopy -O ihex -R .eeprom bin/main.obj bin/main.hex
+
+if [ -c "/dev/ttyUSB0" ]; then
+	echo [4/6] UPLOADING TO NANO
+	avrdude -q -q -c arduino -b 57600 -P /dev/ttyUSB0 -p m328p -U flash:w:bin/main.hex
+elif [ -c "/dev/ttyACM0" ]; then
+	echo [4/6] UPLOADING TO UNO
+	avrdude -q -q -c arduino -P /dev/ttyACM0 -p m328p -U flash:w:bin/main.hex
+else
+	echo NO KNOWN ARDUINO ATTACHED
+fi
+
+echo [5/6] CLEAN
+rm -rf bin
+
+echo [6/6] DONE
