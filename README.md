@@ -5,8 +5,11 @@ some little bits of code written in c that run on an arduino.
 ### Dependencies
 + avr-libc
 + avrdude
-+ gcc
 + gcc-avr
++ gdb+avr
++ binutils-avr
+
+see http://avr-eclipse.sourceforge.net/wiki/index.php/The_AVR_GCC_Toolchain for more details about installing avr utilities on various platforms.
 
 ### Process
 
