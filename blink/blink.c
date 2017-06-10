@@ -7,19 +7,18 @@ int main (void)
   DDRB = 0xFF;
 
   while (1)
-    {
-      /* set PORTB.6 high */
-      PORTB = 0x20;
+  {
+    /* set PORTB.6 high */
+    PORTB = 0x20;
 
-      _delay_ms(10);
+    _delay_ms(10);
 
-      /* set PORTB.6 low */
-      PORTB = 0x00;
+    /* set PORTB.6 low */
+    PORTB = 0x00;
 
-      _delay_ms(1000);
-    }
+    _delay_ms(1000);
+  }
 
   return 1;
 }
-
 
